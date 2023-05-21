@@ -26,9 +26,7 @@ void ViewPort::Render(bool do_clear) {
             }
             Put(chars_[i][j]);
         }
-        if (i + 1 < chars_.size() && i + 1 < dims.y) {
-            Put('\n');
-        }
+        Put('\n');
     }
 
     SetBackgroundColor(Color::kDefault, true);

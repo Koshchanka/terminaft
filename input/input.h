@@ -76,6 +76,14 @@ public:
             case 'D': {
                     return Event{ Action::kKeyboard, Key::D };
             }
+            case 'j':
+            case 'J': {
+                    return Event{ Action::kKeyboard, Key::J };
+            }
+            case 'u':
+            case 'U': {
+                    return Event{ Action::kKeyboard, Key::U };
+            }
             default: {
                 return std::nullopt;
             }

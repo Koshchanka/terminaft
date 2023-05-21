@@ -53,7 +53,7 @@ public:
 
     void DrawSegment(math::Vec4 a, math::Vec4 b, tui::Color color) {
         auto points = DumpSegmentPoints(a, b);
-        for (const auto pt : points) {
+        for (const auto& pt : points) {
             Set(pt, color);
         }
     }
@@ -66,7 +66,7 @@ public:
         DrawPolygon(std::move(verts), outer, SolidPolytexture(fill));
     }
 
-    void DrawPolygon(std::vector<math::Vec4> verts, tui::Color outer, const Polytexture& polytexture) {
+    void DrawPolygon(const std::vector<math::Vec4>& verts, tui::Color outer, const Polytexture& polytexture) {
         std::set<std::pair<int, int>> boundary;
         for (size_t i = 0; i < verts.size(); ++i) {
             size_t j = i + 1;
@@ -410,9 +410,6 @@ private:
             for (int x = min; x <= max; ++x) {
                 auto ratio = (float) (x - min) / (max - min);
                 auto pos = Round(math::Blend(a, b, ratio));
-                if (std::abs(pos.x) + std::abs(pos.y) > 1'000) {
-                    // assert(false);
-                }
                 result.push_back(pos);
             }
         } else {
@@ -427,9 +424,6 @@ private:
             for (int y = min; y <= max; ++y) {
                 auto ratio = (float) (y - min) / (max - min);
                 auto pos = Round(math::Blend(a, b, ratio));
-                if (std::abs(pos.x) + std::abs(pos.y) > 1'000) {
-                    // assert(false);
-                }
                 result.push_back(pos);
             }
         }

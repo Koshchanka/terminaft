@@ -3,6 +3,9 @@
 #include "char.h"
 #include "object.h"
 
+#include <cassert>
+#include <string>
+
 namespace tui {
 
 class Border : public Object {
@@ -27,6 +30,29 @@ public:
 
 private:
     Color color_;
+};
+
+class Textbox : public Object {
+public:
+    Textbox(std::string text, tui::Color color)
+        : Object(1, text.size())
+        , text_(std::move(text))
+        , color_(color)
+    {
+    }
+
+    Rectangle BuildChars() const override {
+        assert(Height() == 1 && Width() == text_.size());
+        Rectangle result(Height(), std::vector<Char>(Width()));
+        for (int i = 0; i < Width(); ++i) {
+            result[0][i] = { .unicode = static_cast<uint32_t>(text_[i]), .fg = color_ };
+        }
+        return result;
+    }
+
+private:
+    std::string text_;
+    tui::Color color_;
 };
 
 }  // namespace tui

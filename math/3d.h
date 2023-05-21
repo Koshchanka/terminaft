@@ -5,12 +5,7 @@
 
 namespace math {
 
-inline Mat4 Perspective(
-    float fovy,
-    float aspect,
-    float zNear,
-    float zFar)
-{
+inline Mat4 Perspective(float fovy, float aspect, float zNear, float zFar) {
     assert(aspect != 0.0);
     assert(zFar != zNear);
 
@@ -25,8 +20,7 @@ inline Mat4 Perspective(
     return result;
 }
 
-inline Mat4 LookAt(Vec3 position, Vec3 target, Vec3 worldUp)
-{
+inline Mat4 LookAt(Vec3 position, Vec3 target, Vec3 worldUp) {
     Vec3 zaxis = (position - target).Normalized();
     Vec3 xaxis = (Vec3::Cross(worldUp.Normalized(), zaxis));
     Vec3 yaxis = Vec3::Cross(zaxis, xaxis);
@@ -48,10 +42,7 @@ inline Mat4 LookAt(Vec3 position, Vec3 target, Vec3 worldUp)
     return rotation * translation;
 }
 
-inline Mat4 Rotate(
-    float angle,
-    Vec3 const & v)
-{
+inline Mat4 Rotate(float angle, Vec3 v) {
     float a = angle;
     float c = cos(a);
     float s = sin(a);

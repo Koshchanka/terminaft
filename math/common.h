@@ -148,7 +148,7 @@ struct Vec3 {
         };
     }
 
-    inline math::Vec3 operator*(float f) {
+    inline math::Vec3 operator*(float f) const {
         return {f * x, f * y, f * z};
     }
 
@@ -192,6 +192,17 @@ struct Vec2 {
             .x = x - other.x,
             .y = y - other.y,
         };
+    }
+
+    Vec2 operator+(const Vec2& other) const {
+        return {
+            .x = x + other.x,
+            .y = y + other.y,
+        };
+    }
+
+    Vec2 operator*(float c) const {
+        return {.x = x * c, .y = y * c};
     }
 
     static float Dot(const Vec2& a, const Vec2& b) {
